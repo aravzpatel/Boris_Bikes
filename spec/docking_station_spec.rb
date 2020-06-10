@@ -7,7 +7,11 @@ describe DockingStation do
     # expect(subject.release_bike).to be_instance_of Bike this checks if the release bike returns a bike
     expect(subject.release_bike.working?).to eql true
   end
+
+  it { is_expected.to respond_to :dock_bike }
+
 end
+
 
 
 # describe 'Greeter' do
