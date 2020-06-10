@@ -10,6 +10,18 @@ describe DockingStation do
 
   it { is_expected.to respond_to :dock_bike }
 
+  it "has a bike which can be docked at the docking station" do
+    bike = subject.release_bike
+    expect(subject.dock_bike(bike)).to eql true
+  end
+
+  it "shows which bike is docked at the docking station" do
+    bike = subject.release_bike
+    subject.dock_bike(bike)
+    expect(subject.docked_bike).to eql bike
+  end
+
+  it { should respond_to :docked_bike}
 end
 
 
