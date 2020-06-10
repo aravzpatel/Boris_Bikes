@@ -2,6 +2,11 @@ require 'docking_station.rb'
 
 describe DockingStation do
   it { is_expected.to respond_to :release_bike }
+
+  it "get's a bike and then expects the bike to be working" do
+    # expect(subject.release_bike).to be_instance_of Bike this checks if the release bike returns a bike
+    expect(subject.release_bike.working?).to eql true
+  end
 end
 
 
