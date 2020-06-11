@@ -9,7 +9,7 @@ class DockingStation
     end
 
     def docked_bike(bike)
-        @has_docked_bike = bike
+        @has_docked_bike != nil ? (raise StandardError.new "The dock is full") : @has_docked_bike = bike
         true
     end
     

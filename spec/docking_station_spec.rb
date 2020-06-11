@@ -36,7 +36,18 @@ describe DockingStation do
   describe "#release_bike fails if the dock is empty" do
     it "raises an error if the dock is empty" do
       docking_station = DockingStation.new
-      expect { docking_station.release_bike }.to raise_error
+      expect { docking_station.release_bike }.to raise_error(StandardError)
     end
   end
+
+  describe "#docked_bike fails if the dock is full" do
+    it "raises an error if dock is full" do
+      docking_station = DockingStation.new
+      docking_station.docked_bike(Bike.new)
+      expect { docking_station.docked_bike(Bike.new) }.to raise_error(StandardError)
+    end
+  end
+
+
+
 end
