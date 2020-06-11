@@ -47,4 +47,14 @@ describe DockingStation do
       expect { docking_station.docked_bike(Bike.new) }.to raise_error(StandardError)
     end
   end
+
+  describe "check that the private methods are private" do
+    it "raises a NoMethodError when empty? is called outside of the class" do
+      expect { subject.empty? }.to raise_error(NoMethodError)
+    end
+
+    it "raises a NoMethodError when full? is called outside of the class" do
+      expect { subject.full? }.to raise_error(NoMethodError)
+    end
+  end
 end

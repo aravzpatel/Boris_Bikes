@@ -8,13 +8,22 @@ class DockingStation
     end
 
     def release_bike
-        @bike_array == [] ? (raise StandardError.new "There are no bikes") : Bike.new
+        empty? ? (raise StandardError.new "There are no bikes") : Bike.new
         # Bike.new #if we defined this as a variable then we wouldn't be able to read the variable outside of the class, so have to retunr just the class
     end
 
     def docked_bike(bike)
-        @bike_array.count >= 20 ? (raise StandardError.new "The dock is full") : @bike_array << bike
+        full? ? (raise StandardError.new "The dock is full") : @bike_array << bike
         true
     end
-    
+
+    private
+    def full?
+        @bike_array.count >= 20 ? true : false
+    end
+
+    def empty?
+        @bike_array == [] ? true : false
+    end
+
 end
