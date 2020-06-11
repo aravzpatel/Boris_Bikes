@@ -3,9 +3,15 @@ require 'docking_station.rb'
 describe DockingStation do
   it { is_expected.to respond_to :release_bike }
 
+  # it "responds to release_bike" do
+  #   expect(subject.docked_bike(Bike.new)).to respond_to :release_bike
+  # end
+
   it "get's a bike and then expects the bike to be working" do
     # expect(subject.release_bike).to be_instance_of Bike this checks if the release bike returns a bike
-    expect(subject.release_bike.working?).to eql true
+    station = DockingStation.new
+    station.docked_bike(Bike.new)
+    expect(station.release_bike.working?).to eql true
   end
 
   #it { is_expected.to respond_to :dock_bike }
@@ -13,7 +19,7 @@ describe DockingStation do
   describe "#docked_bike" do
     it "docks a bike when I give it a bike" do
       dockingstation = DockingStation.new
-      bike = dockingstation.release_bike
+      bike = Bike.new
       expect(dockingstation.docked_bike(bike)).to eql true
     end
   end
@@ -21,32 +27,16 @@ describe DockingStation do
   describe "#has_docked_bike" do
     it "returns bike name when asked, if bike exists" do
       dockingstation = DockingStation.new
-      bike = dockingstation.release_bike
+      bike = Bike.new
       dockingstation.docked_bike(bike)
       expect(dockingstation.has_docked_bike).to eql(bike)
     end
   end
 
-
-
-
-
-
-
-
-
-
-
-  # it "has a bike which can be docked at the docking station" do
-  #   bike = subject.release_bike
-  #   expect(subject.dock_bike(bike)).to eql true
-  # end
-
-  # it "shows which bike is docked at the docking station" do
-  #   bike = subject.release_bike
-  #   subject.dock_bike(bike)
-  #   expect(subject.docked_bike).to eql bike
-  # end
-
-  # it { should respond_to :docked_bike}
+  describe "#release_bike fails if the dock is empty" do
+    it "raises an error if the dock is empty" do
+      docking_station = DockingStation.new
+      expect { docking_station.release_bike }.to raise_error
+    end
+  end
 end
