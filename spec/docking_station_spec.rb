@@ -43,7 +43,7 @@ describe DockingStation do
   describe "#docked_bike fails if the dock is full" do
     it "raises an error if dock is full" do
       docking_station = DockingStation.new
-      20.times { docking_station.docked_bike(Bike.new) }
+      DEFAULT_CAPACITY.times { docking_station.docked_bike(Bike.new) }
       expect { docking_station.docked_bike(Bike.new) }.to raise_error(StandardError)
     end
   end
@@ -55,6 +55,23 @@ describe DockingStation do
 
     it "raises a NoMethodError when full? is called outside of the class" do
       expect { subject.full? }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe "each station has a default capacity" do
+    it "returns the default capacity as an integer" do
+      expect( DEFAULT_CAPACITY ).to be_an_instance_of(Integer)
+    end
+  end
+
+  describe "each station has an individual default capacity" do
+    it "returns the capacity of the station" do
+      expect(subject.capacity).to be_an_instance_of(Integer)
+    end
+
+    it "sets the capacity of the station when given a value" do
+      station = DockingStation.new(30)
+      expect(station.capacity).to eql(30)
     end
   end
 end
