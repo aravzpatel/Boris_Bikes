@@ -8,28 +8,45 @@ describe DockingStation do
     expect(subject.release_bike.working?).to eql true
   end
 
-  it { is_expected.to respond_to :dock_bike }
+  #it { is_expected.to respond_to :dock_bike }
 
-  it "has a bike which can be docked at the docking station" do
-    bike = subject.release_bike
-    expect(subject.dock_bike(bike)).to eql true
+  describe "#docked_bike" do
+    it "docks a bike when I give it a bike" do
+      dockingstation = DockingStation.new
+      bike = dockingstation.release_bike
+      expect(dockingstation.docked_bike(bike)).to eql true
+    end
   end
 
-  it "shows which bike is docked at the docking station" do
-    bike = subject.release_bike
-    subject.dock_bike(bike)
-    expect(subject.docked_bike).to eql bike
+  describe "#has_docked_bike" do
+    it "returns bike name when asked, if bike exists" do
+      dockingstation = DockingStation.new
+      bike = dockingstation.release_bike
+      dockingstation.docked_bike(bike)
+      expect(dockingstation.has_docked_bike).to eql(bike)
+    end
   end
 
-  it { should respond_to :docked_bike}
+
+
+
+
+
+
+
+
+
+
+  # it "has a bike which can be docked at the docking station" do
+  #   bike = subject.release_bike
+  #   expect(subject.dock_bike(bike)).to eql true
+  # end
+
+  # it "shows which bike is docked at the docking station" do
+  #   bike = subject.release_bike
+  #   subject.dock_bike(bike)
+  #   expect(subject.docked_bike).to eql bike
+  # end
+
+  # it { should respond_to :docked_bike}
 end
-
-
-
-# describe 'Greeter' do
-#   it 'greets Rico' do
-#     expect(greet('Rico')).to eq 'Hello, Rico, how are you today?'
-#   end
-# end
-
-# expect(obj).to respond_to :save!
