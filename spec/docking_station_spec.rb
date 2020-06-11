@@ -24,12 +24,12 @@ describe DockingStation do
     end
   end
 
-  describe "#has_docked_bike" do
+  describe "#bike_array" do
     it "returns bike name when asked, if bike exists" do
       dockingstation = DockingStation.new
       bike = Bike.new
       dockingstation.docked_bike(bike)
-      expect(dockingstation.has_docked_bike).to eql(bike)
+      expect(dockingstation.bike_array[0]).to eql(bike)
     end
   end
 
@@ -43,11 +43,8 @@ describe DockingStation do
   describe "#docked_bike fails if the dock is full" do
     it "raises an error if dock is full" do
       docking_station = DockingStation.new
-      docking_station.docked_bike(Bike.new)
+      20.times { docking_station.docked_bike(Bike.new) }
       expect { docking_station.docked_bike(Bike.new) }.to raise_error(StandardError)
     end
   end
-
-
-
 end
