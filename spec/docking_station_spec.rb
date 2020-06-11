@@ -11,7 +11,7 @@ describe DockingStation do
     # expect(subject.release_bike).to be_instance_of Bike this checks if the release bike returns a bike
     station = DockingStation.new
     station.docked_bike(Bike.new)
-    expect(station.release_bike.working?).to eql true
+    expect(station.release_bike.working).to eql true
   end
 
   #it { is_expected.to respond_to :dock_bike }
@@ -72,6 +72,24 @@ describe DockingStation do
     it "sets the capacity of the station when given a value" do
       station = DockingStation.new(30)
       expect(station.capacity).to eql(30)
+    end
+  end
+
+  describe "#docked_bike" do
+    it "sets the bike to be broken if the user says so" do
+      station = DockingStation.new
+      bike = Bike.new
+      station.docked_bike(bike.broken)
+      expect(bike.working).to eql(false)
+    end
+  end
+
+  describe "#release_bike" do
+    it "does not release a bike if the bike is broken" do
+      station = DockingStation.new
+      bike = Bike.new
+      station.docked_bike(bike.broken)
+      expect {station.release_bike}.to raise_error(StandardError)
     end
   end
 end
